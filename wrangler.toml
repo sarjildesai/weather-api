@@ -1,0 +1,19 @@
+name = "weather-api"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Serves everything in ./static automatically for any request the Worker
+# code above doesn't explicitly handle (i.e. the UI itself)
+[assets]
+directory = "./static"
+binding = "ASSETS"
+
+# Replaces the in-memory `logs` dict from app.py.
+# You must create this namespace yourself (see README-CLOUDFLARE.md)
+# and paste its real ID below before deploying.
+[[kv_namespaces]]
+binding = "LOGS_KV"
+id = "502d7ca869de42afbce1f6e2a7099f63"
+
+[vars]
+APP_ENV = "production"

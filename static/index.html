@@ -416,7 +416,9 @@
 <footer>Live data via your local weather service</footer>
 
 <script>
-  const API_BASE = "http://localhost:5000";
+  // Relative path: works no matter what domain/port this page is served from,
+  // since the Flask backend serves both this UI and the API from the same origin.
+  const API_BASE = "";
 
   const bodyEl = document.body;
   const mainEl = document.getElementById('main');
