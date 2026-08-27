@@ -29,7 +29,15 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'npx wrangler deploy'
+                script {
+                    if (env.BRANCH_NAME == 'main') {
+                        sh 'npx wrangler deploy --env production'
+                    } else if (env.BRANCH_NAME == 'staging') {
+                        sh 'npx wrangler deploy --env staging'
+                    } else {
+                        sh 'npx wrangler deploy'
+                    }
+                }
             }
         }
     }
