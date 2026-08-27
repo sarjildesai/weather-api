@@ -35,19 +35,3 @@ pipeline {
                     } else if (env.BRANCH_NAME == 'staging') {
                         sh 'npx wrangler deploy --env staging'
                     } else {
-                        sh 'npx wrangler deploy'
-                    }
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Deployment succeeded.'
-        }
-        failure {
-            echo 'Deployment failed. Check the logs above.'
-        }
-    }
-}
