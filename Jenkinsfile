@@ -10,7 +10,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        IMAGE_NAME             = 'YOUR_DOCKERHUB_USERNAME/weather-api'
+        IMAGE_NAME             = 'sarjildesai/weather-api'
         SHORT_SHA               = "${GIT_COMMIT.take(7)}"
     }
 
