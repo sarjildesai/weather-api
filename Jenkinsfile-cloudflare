@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    environment {
+        CLOUDFLARE_API_TOKEN = credentials('CLOUDFLARE_API_TOKEN')
+    }
+
+    stages {
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Approval for production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                input message: 'Deploy to production?', ok: 'Deploy'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'npx wrangler deploy'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment succeeded.'
+        }
+        failure {
+            echo 'Deployment failed. Check the logs above.'
+        }
+    }
+}
